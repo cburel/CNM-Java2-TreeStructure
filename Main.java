@@ -35,6 +35,8 @@ public class Main {
         // test adding imperial measurement personset
         PersonImperialSet imperialPeople = new PersonImperialSet();
 
+        SortedTreeSet treeSet = new SortedTreeSet();
+
         // try to open the file
         try (Scanner fileReader = new Scanner(new File(fileName))) {
 
@@ -60,11 +62,11 @@ public class Main {
                 // add person to ordered person set
                 orderedPeople.add(person);
 
-                // add person to imperial measurement person set. "clone" the data from person
+                // add person to tree person set. "clone" the data from person
                 // var into a new Person to avoid the imperial set converting measurements
                 // on person var, which will break the ordered set logic and cause duplicate
                 // data in the ordered set.
-                imperialPeople.add(new Person(person.getName(), person.getHeight(), person.getWeight()));
+                treeSet.add(new Person(person.getName(), person.getHeight(), person.getWeight()));
             }
         } catch (FileNotFoundException e) {
 
@@ -75,6 +77,7 @@ public class Main {
             System.exit(1);
         }
 
+        // TODO: convert this to print the tree set
         // write the imperial set info to an external file
         try {
 

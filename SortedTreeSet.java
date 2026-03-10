@@ -54,12 +54,37 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         return this.hasValue;
     }
 
-    public void setHasValue(boolean value) {
-        this.hasValue = value;
-    }
-
     public void add(Person p) {
 
+        // if this node is null, add the person to it and set its hasValue flag to true
+        if (!hasValue) {
+            this.person = p;
+            this.hasValue = true;
+            return;
+        }
+
+        // otherwise, check where to put the person
+        int i = this.person.compareTo(p);
+
+        // TODO: test to make sure this is sorting correctly
+        // TODO: implement code to ensure no duplicates
+        // if this.person < p
+        if (i == -1) {
+            if (leftChild == null) {
+                leftChild = new SortedTreeSet();
+                leftChild.parent = this;
+            }
+            leftChild.add(p);
+        }
+
+        // if this.person == p or this.person > p
+        else {
+            if (rightChild == null) {
+                rightChild = new SortedTreeSet();
+                rightChild.parent = this;
+            }
+            rightChild.add(p);
+        }
     }
 
     public void clearSelf() {
