@@ -1,42 +1,10 @@
 
 /**
  * @author Celeste Burel
- * Date: 3/1/2026
- * Purpose: To practice inheritance/using interfaces.
- *      Part 2: To create and instantiate two different types
- *      of person sets and write each of them to their own
- *      output file.
+ * Date: 3/15/2026
+ * Purpose: To practice implementing and using a binary tree.
  * Sources: N/A
  */
-
-/*
-This code is provided to give you a
-starting place. It should be modified.
-No further imports are needed.
-To earn full credit, you must also
-answer the following questions:
-
-Q1: Car and Engine are related
-by which, Inheritance or Composition?
--- Following the "is-a" = inheritence vs "has-a" = composition rule,
-a car has an engine, so they are related by composition
-
-Q2: Color and Red are related
-by which, Inheritance or Composition?
--- Red is a color; inheritence
-
-Q3: Shirt and Clothing are related
-by which, Inheritance or Composition?
--- Shirt is a kind of clothing; inheritence
-
-Q4: Furniture and Desk are related
-by which, Inheritance or Composition?
--- Desk is a piece of furniture; inheritence
-
-Q5: CellPhone and Battery are related
-by which, Inheritance or Composition?
--- CellPhone has a battery; composition
-*/
 
 import java.io.File;
 import java.io.FileNotFoundException;
