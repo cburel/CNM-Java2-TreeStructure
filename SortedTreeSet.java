@@ -54,9 +54,41 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         return this.hasValue;
     }
 
+    public boolean contains(Person p) {
+        return find(this.getParent(), p);
+    }
+
+    public boolean find(SortedTreeSet tree, Person p) {
+        if (tree == null) {
+            return false;
+        }
+        int result = p.compareTo(tree.getPerson());
+
+        // person was found
+        if (result == 0) {
+            return true;
+        }
+
+        // person was not found but their position is less than the current position.
+        // search to the left
+        else if (result < 0) {
+            return find(tree.getLeft(), p);
+        }
+
+        // person was not found but their position is greater than the current position.
+        // search right
+        else {
+            return find(tree.getRight(), p);
+        }
+    }
+
     public void add(Person p) {
 
-        // TODO: implement code to ensure no duplicates
+        // TODO: test this code to ensure no duplicates
+        if (this.contains(p)) {
+            return;
+        }
+
         // if this node is null, add the person to it and set its hasValue flag to true
         if (!hasValue) {
             this.person = p;
@@ -105,6 +137,8 @@ public class SortedTreeSet implements SortedTreeSetInterface {
     }
 
     private void traverseTree(SortedTreeSet tree, StringBuilder builder) {
+
+        // TODO: ensure this doesn't stop traversal prematurely
         if (tree == null) {
             return;
         }
