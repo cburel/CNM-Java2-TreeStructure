@@ -56,6 +56,7 @@ public class SortedTreeSet implements SortedTreeSetInterface {
 
     public void add(Person p) {
 
+        // TODO: implement code to ensure no duplicates
         // if this node is null, add the person to it and set its hasValue flag to true
         if (!hasValue) {
             this.person = p;
@@ -88,7 +89,7 @@ public class SortedTreeSet implements SortedTreeSetInterface {
     }
 
     public void clearSelf() {
-        this.parent = null;
+        this.setParent(null);
         this.setLeft(null);
         this.setRight(null);
         this.person = null;
@@ -97,6 +98,19 @@ public class SortedTreeSet implements SortedTreeSetInterface {
 
     @Override
     public String toString() {
-        return ""; // TODO: placeholder
+        StringBuilder output = new StringBuilder();
+        traverseTree(this.parent, output);
+
+        return output.toString();
+    }
+
+    private void traverseTree(SortedTreeSet tree, StringBuilder builder) {
+        if (tree == null) {
+            return;
+        }
+
+        traverseTree(tree.getLeft(), builder);
+        builder.append(tree.getPerson().toString()).append(" ");
+        traverseTree(tree.getRight(), builder);
     }
 }
