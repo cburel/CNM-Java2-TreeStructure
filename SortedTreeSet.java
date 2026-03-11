@@ -97,10 +97,9 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         }
 
         // otherwise, check where to put the person
-        int i = this.person.compareTo(p);
+        int i = this.getPerson().compareTo(p);
 
         // TODO: test to make sure this is sorting correctly
-        // TODO: implement code to ensure no duplicates
         // if this.person < p
         if (i == -1) {
             if (leftChild == null) {

@@ -32,9 +32,7 @@ public class Main {
         // test adding ordered personset
         PersonOrderedSet orderedPeople = new PersonOrderedSet();
 
-        // test adding imperial measurement personset
-        PersonImperialSet imperialPeople = new PersonImperialSet();
-
+        // add sorted binary tree set
         SortedTreeSet treeSet = new SortedTreeSet();
 
         // try to open the file
@@ -78,33 +76,6 @@ public class Main {
         }
 
         // TODO: convert this to print the tree set
-        // write the imperial set info to an external file
-        try {
-
-            // set file name and create the writer
-            FileWriter fileWriterImperial = new FileWriter("hr_imperial_set_output.txt");
-
-            // write the name, height, weight in imperial measurements to the file
-            Header imperialHeader = new Header("(in)", ("(lb)"));
-
-            // write each person to the file
-            fileWriterImperial.write(imperialHeader.toString() + "\n");
-            for (Person person : imperialPeople.people) {
-                fileWriterImperial.write(person.toString() + "\n");
-            }
-
-            // release resources
-            fileWriterImperial.close();
-
-            // print confirmation message
-            System.out.println("Imperial set file was successfully created.");
-        } catch (IOException e) {
-
-            // something went wrong. print exception info
-            e.printStackTrace();
-            System.out.println(e);
-            System.exit(1);
-        }
 
         // write the ordered set info to an external file
         try {
