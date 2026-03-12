@@ -1,4 +1,8 @@
-
+/**
+ * The Sorted Tree Set class. Takes given values and inserts them into a tree,
+ * sorted alphabetically. Note that this is a "tree of trees", so each tree can
+ * also be thought of as a node.
+ */
 public class SortedTreeSet implements SortedTreeSetInterface {
 
     private SortedTreeSet parent;
@@ -7,6 +11,10 @@ public class SortedTreeSet implements SortedTreeSetInterface {
     private Person person;
     private boolean hasValue;
 
+    /**
+     * Constructor. Sets the current node's parent, children, person data to none.
+     * Sets hasValue flag to false.
+     */
     public SortedTreeSet() {
         this.parent = null;
         this.leftChild = null;
@@ -15,18 +23,36 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         this.hasValue = false;
     }
 
+    /**
+     * Fetches this node's person data
+     * 
+     * @return The person data contained in this node
+     */
     public Person getPerson() {
         return this.person;
     }
 
+    /**
+     * Checks whether this node has a left child
+     * 
+     * @return True if there is a left child, false otherwise
+     */
     public boolean hasLeft() {
         return this.leftChild != null;
     }
 
+    /**
+     * Sets this node's left child
+     */
     public void setLeft(SortedTreeSet left) {
         this.leftChild = left;
     }
 
+    /**
+     * Fetches this node's left child
+     * 
+     * @return This node's left child
+     */
     public SortedTreeSet getLeft() {
         return this.leftChild;
     }
@@ -67,8 +93,6 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         // otherwise, check where to put the person
         int i = this.getPerson().compareTo(p);
 
-        // TODO: test to make sure this is sorting correctly
-
         // since this tree is sorted, duplicates will always try to go to the same spot.
         // therefore, if i == 0, this.person is a duplicate. the dupe will overwrite the
         // data in the current spot, but since it is the same data, we end up without
@@ -82,6 +106,8 @@ public class SortedTreeSet implements SortedTreeSetInterface {
             if (leftChild == null) {
                 leftChild = new SortedTreeSet();
                 leftChild.setParent(this);
+
+                // DEBUG: ensure child was added in the correct spot
                 System.out.println("Adding " + p.getName() + " to the left of " + this.getPerson());
             }
             leftChild.add(p);
@@ -92,6 +118,8 @@ public class SortedTreeSet implements SortedTreeSetInterface {
             if (rightChild == null) {
                 rightChild = new SortedTreeSet();
                 rightChild.setParent(this);
+
+                // DEBUG: ensure child was added in the correct spot
                 System.out.println("Adding " + p.getName() + " to the right of " + this.getPerson());
             }
             rightChild.add(p);
@@ -116,7 +144,6 @@ public class SortedTreeSet implements SortedTreeSetInterface {
 
     private void traverseTree(SortedTreeSet tree, StringBuilder builder) {
 
-        // TODO: ensure this doesn't stop traversal prematurely
         if (tree == null) {
             return;
         }

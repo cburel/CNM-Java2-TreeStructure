@@ -26,13 +26,10 @@ public class Main {
         // prompt for the name of the file to read into the program
         String fileName = args[0];
 
-        // test adding a person set and adding a person to the person set, then print
-        PersonSet ps = new PersonSet();
-
-        // test adding ordered personset
+        // create ordered personset
         PersonOrderedSet orderedPeople = new PersonOrderedSet();
 
-        // add sorted binary tree set
+        // create sorted binary tree set
         SortedTreeSet treeSet = new SortedTreeSet();
 
         // try to open the file
@@ -54,9 +51,6 @@ public class Main {
                 // list if they are not a duplicate
                 Person person = new Person(name, height, weight);
 
-                // add person to standard person set
-                ps.add(person);
-
                 // add person to ordered person set
                 orderedPeople.add(person);
 
@@ -65,7 +59,6 @@ public class Main {
                 // on person var, which will break the ordered set logic and cause duplicate
                 // data in the ordered set.
                 treeSet.add(new Person(person.getName(), person.getHeight(), person.getWeight()));
-                // System.out.println(treeSet.toString());
             }
         } catch (FileNotFoundException e) {
 
@@ -76,7 +69,7 @@ public class Main {
             System.exit(1);
         }
 
-        // TODO: convert this to print the tree set
+        // DEBUG: print the tree set to the console
         System.out.println();
         System.out.println(treeSet.toString());
 
@@ -103,6 +96,35 @@ public class Main {
         } catch (IOException e) {
 
             // something went wrong. print exception info
+            e.printStackTrace();
+            System.out.println(e);
+            System.exit(1);
+        }
+
+        // write the tree set to an external file
+        try {
+
+            // set the file name and create the writer
+            FileWriter treeWriter = new FileWriter("hr_tree_set_output.txt");
+
+            // write the name, height, weight in metric to the file
+            Header treeHeader = new Header("(cm)", "(kg)");
+
+            // write the tree header to the file
+            treeWriter.write(treeHeader.toString() + "\n");
+
+            // write the tree to the file
+            treeWriter.write(treeSet.toString());
+
+            // free resources
+            treeWriter.close();
+
+            // print confirmation message
+            System.out.println("Tree set file was successfully created.");
+
+        } catch (IOException e) {
+
+            // something went wrong. print exception info.
             e.printStackTrace();
             System.out.println(e);
             System.exit(1);
