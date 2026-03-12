@@ -1,0 +1,6 @@
+Name       Height (cm)          Weight (kg)
+Bowser         310.00               726.00
+Luigi          158.00                83.00
+Mario          155.00                90.00
+Peach          183.00                60.00
+Toad            41.00                 7.00

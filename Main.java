@@ -65,6 +65,7 @@ public class Main {
                 // on person var, which will break the ordered set logic and cause duplicate
                 // data in the ordered set.
                 treeSet.add(new Person(person.getName(), person.getHeight(), person.getWeight()));
+                // System.out.println(treeSet.toString());
             }
         } catch (FileNotFoundException e) {
 
@@ -76,6 +77,8 @@ public class Main {
         }
 
         // TODO: convert this to print the tree set
+        System.out.println();
+        System.out.println(treeSet.toString());
 
         // write the ordered set info to an external file
         try {

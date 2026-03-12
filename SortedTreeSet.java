@@ -4,13 +4,14 @@ public class SortedTreeSet implements SortedTreeSetInterface {
     private SortedTreeSet parent;
     private SortedTreeSet leftChild;
     private SortedTreeSet rightChild;
-    private boolean hasValue;
     private Person person;
+    private boolean hasValue;
 
     public SortedTreeSet() {
         this.parent = null;
         this.leftChild = null;
         this.rightChild = null;
+        this.person = null;
         this.hasValue = false;
     }
 
@@ -54,40 +55,7 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         return this.hasValue;
     }
 
-    public boolean contains(Person p) {
-        return find(this.getParent(), p);
-    }
-
-    public boolean find(SortedTreeSet tree, Person p) {
-        if (tree == null) {
-            return false;
-        }
-        int result = p.compareTo(tree.getPerson());
-
-        // person was found
-        if (result == 0) {
-            return true;
-        }
-
-        // person was not found but their position is less than the current position.
-        // search to the left
-        else if (result < 0) {
-            return find(tree.getLeft(), p);
-        }
-
-        // person was not found but their position is greater than the current position.
-        // search right
-        else {
-            return find(tree.getRight(), p);
-        }
-    }
-
     public void add(Person p) {
-
-        // TODO: test this code to ensure no duplicates
-        if (this.contains(p)) {
-            return;
-        }
 
         // if this node is null, add the person to it and set its hasValue flag to true
         if (!hasValue) {
@@ -100,20 +68,31 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         int i = this.getPerson().compareTo(p);
 
         // TODO: test to make sure this is sorting correctly
-        // if this.person < p
-        if (i == -1) {
+
+        // since this tree is sorted, duplicates will always try to go to the same spot.
+        // therefore, if i == 0, this.person is a duplicate. the dupe will overwrite the
+        // data in the current spot, but since it is the same data, we end up without
+        // duplicate data.
+        if (i == 0) {
+            return;
+        }
+
+        // if p is greater, put it in the left branch
+        if (i > 0) {
             if (leftChild == null) {
                 leftChild = new SortedTreeSet();
-                leftChild.parent = this;
+                leftChild.setParent(this);
+                System.out.println("Adding " + p.getName() + " to the left of " + this.getPerson());
             }
             leftChild.add(p);
         }
 
-        // if this.person == p or this.person > p
+        // if p is lesser, put it in the right branch
         else {
             if (rightChild == null) {
                 rightChild = new SortedTreeSet();
-                rightChild.parent = this;
+                rightChild.setParent(this);
+                System.out.println("Adding " + p.getName() + " to the right of " + this.getPerson());
             }
             rightChild.add(p);
         }
@@ -130,7 +109,7 @@ public class SortedTreeSet implements SortedTreeSetInterface {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        traverseTree(this.parent, output);
+        traverseTree(this, output);
 
         return output.toString();
     }
@@ -143,7 +122,7 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         }
 
         traverseTree(tree.getLeft(), builder);
-        builder.append(tree.getPerson().toString()).append(" ");
+        builder.append(tree.getPerson().toString()).append(" \n");
         traverseTree(tree.getRight(), builder);
     }
 }
