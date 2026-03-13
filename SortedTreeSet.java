@@ -43,6 +43,8 @@ public class SortedTreeSet implements SortedTreeSetInterface {
 
     /**
      * Sets this node's left child
+     * 
+     * @param left The left child node
      */
     public void setLeft(SortedTreeSet left) {
         this.leftChild = left;
@@ -57,30 +59,65 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         return this.leftChild;
     }
 
+    /**
+     * Checks whether this node has a right child
+     * 
+     * @return True if there is a right child, false otherwise
+     */
     public boolean hasRight() {
         return this.rightChild != null;
     }
 
+    /**
+     * Sets this node's right child
+     * 
+     * @param right This node's right child
+     */
     public void setRight(SortedTreeSet right) {
         this.rightChild = right;
     }
 
+    /**
+     * Fetches this node's right child
+     * 
+     * @return This node's right child
+     */
     public SortedTreeSet getRight() {
         return this.rightChild;
     }
 
+    /**
+     * Fetches this node's parent node
+     * 
+     * @return This node's parent
+     */
     public SortedTreeSet getParent() {
         return this.parent;
     }
 
+    /**
+     * Sets this node's parent
+     * 
+     * @param parent This node's parent
+     */
     public void setParent(SortedTreeSet parent) {
         this.parent = parent;
     }
 
+    /**
+     * Fetches whether this node has a value or is null
+     * 
+     * @return True if there is a value, false otherwise
+     */
     public boolean getHasValue() {
         return this.hasValue;
     }
 
+    /**
+     * Adds a given person to the tree
+     * 
+     * @param p The person to add to the tree
+     */
     public void add(Person p) {
 
         // if this node is null, add the person to it and set its hasValue flag to true
@@ -126,6 +163,9 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         }
     }
 
+    /**
+     * Empties this node by setting attached nodes to null and hasValue to false
+     */
     public void clearSelf() {
         this.setParent(null);
         this.setLeft(null);
@@ -134,6 +174,11 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         this.hasValue = false;
     }
 
+    /**
+     * Traverses the entire binary tree and adds each value to a string builder
+     * 
+     * @return The string created by traversing the entire binary tree
+     */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
@@ -142,6 +187,13 @@ public class SortedTreeSet implements SortedTreeSetInterface {
         return output.toString();
     }
 
+    /**
+     * Traverses the entire binary tree and adds each value to the string builder
+     * for toString output. Stops when the tree reaches its end
+     * 
+     * @param tree    The current node
+     * @param builder The string builder to add the node's value to
+     */
     private void traverseTree(SortedTreeSet tree, StringBuilder builder) {
 
         if (tree == null) {
